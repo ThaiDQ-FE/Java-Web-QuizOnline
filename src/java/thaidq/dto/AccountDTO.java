@@ -19,6 +19,15 @@ public class AccountDTO {
     public AccountDTO() {
     }
 
+    public AccountDTO(String email, String name, int role, int status) {
+        this.email = email;
+        this.name = name;
+        this.role = role;
+        this.status = status;
+    }
+
+    
+    
     public AccountDTO(String email, String name, String password, int role, int status) {
         this.email = email;
         this.name = name;
