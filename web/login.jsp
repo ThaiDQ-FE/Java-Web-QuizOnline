@@ -119,7 +119,7 @@
         }
         .container{
             width: 60%;
-            height: 65%;
+            height: auto;
             background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
             position: absolute;
             top: 50%;
@@ -135,7 +135,7 @@
         }
         .login-image{
             width: 50%;
-            height: 100%;
+            height: auto;
             background-image: url(https://i.ibb.co/FVdfL97/yasuo.gif);
             background-position: center;
             background-repeat: no-repeat;

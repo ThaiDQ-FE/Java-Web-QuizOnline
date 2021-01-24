@@ -33,24 +33,12 @@
                     <c:if test="${role != 1}">
                         <h4 class="home-hello">Hello, <c:out value="${name}"/></h4>
                     </c:if>
-                    
+
                 </div>
                 <div class="home-middle">
-                    <form class="" action="GetAllQuestion" method="POST">
-                        <input class="logout-button click" type="submit" name="btnAction" value="Get All Question"/>
-                    </form>
-                    <form class="" action="CreateQuestion" method="POST">
-                        <input class="logout-button click" type="submit" name="btnAction" value="Create Question"/>
-                    </form>
-                    <form class="" action="SearchQuestion" method="POST">
-                        <input class="logout-button click" type="submit" name="btnAction" value="Search Question"/>
-                    </form>
-                    <form class="" action="UpdateQuestion" method="POST">
-                        <input class="logout-button click" type="submit" name="btnAction" value="Update Question"/>
-                    </form>
-                    <form class="" action="DeleteQuestion" method="POST">
-                        <input class="logout-button click" type="submit" name="btnAction" value="Delete Question"/>
-                    </form>     
+                    <a class="home-a-link" href="LoadStatus">Get All Question</a><br/>
+                    <a class="home-a-link" href="LoadSubject">Create Question No Image</a><br/>
+                    <a class="home-a-link" href="createQuestionNoImage.jsp">Create Question With Image</a>
                 </div>
                 <div class="home-footer">
                     <form class="home-hello" action="logout" method="POST">
@@ -68,6 +56,12 @@
         }
         a{
             text-decoration: none;
+            font-size: 26px;
+            color: black;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #ada996;
         }
         input:focus{
             outline: none;
@@ -84,7 +78,7 @@
         }
         .container{
             width: 30%;
-            height: 60%;
+            height: auto;
             background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
             position: absolute;
             top: 50%;
