@@ -18,13 +18,14 @@ import thaidq.utils.DBUtils;
  * @author thaid
  */
 public class SubjectDAO {
+
     private Connection conn;
     private PreparedStatement preStm;
     private ResultSet rs;
 
     public SubjectDAO() {
     }
-    
+
     private void closeConnection() throws Exception {
         if (rs != null) {
             rs.close();
@@ -36,7 +37,7 @@ public class SubjectDAO {
             conn.close();
         }
     }
-    
+
     public List<SubjectDTO> getAllSubject() throws Exception {
         conn = null;
         preStm = null;
@@ -66,5 +67,53 @@ public class SubjectDAO {
             closeConnection();
         }
         return list;
+    }
+
+    public int getQuizTimeOfSubject(String subjectID) throws Exception {
+        conn = null;
+        preStm = null;
+        rs = null;
+        int result = 0;
+        try {
+            conn = DBUtils.makeConnection();
+            if (conn != null) {
+                String sql = "Select quizTime from tblSubject where subjectID = ?";
+
+                preStm = conn.prepareStatement(sql);
+                preStm.setString(1, subjectID);
+                rs = preStm.executeQuery();
+                if (rs.next()) {
+                    result = rs.getInt("quizTime");
+
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return result;
+    }
+
+    public int getNumberQuestionOfSubject(String subjectID) throws Exception {
+        conn = null;
+        preStm = null;
+        rs = null;
+        int result = 0;
+        try {
+            conn = DBUtils.makeConnection();
+            if (conn != null) {
+                String sql = "Select numberQuestion from tblSubject where subjectID = ?";
+
+                preStm = conn.prepareStatement(sql);
+                preStm.setString(1, subjectID);
+                rs = preStm.executeQuery();
+                if (rs.next()) {
+                    result = rs.getInt("numberQuestion");
+
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return result;
     }
 }

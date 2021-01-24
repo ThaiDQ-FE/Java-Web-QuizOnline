@@ -48,6 +48,14 @@
         <servlet-name>UpdateQuestionServlet</servlet-name>
         <servlet-class>thaidq.servlet.UpdateQuestionServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TakeQuizServlet</servlet-name>
+        <servlet-class>thaidq.servlet.TakeQuizServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubmitQuizServlet</servlet-name>
+        <servlet-class>thaidq.servlet.SubmitQuizServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>UpdateQuestionServlet</servlet-name>
         <url-pattern>/UpdateQuestionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TakeQuizServlet</servlet-name>
+        <url-pattern>/TakeQuizServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubmitQuizServlet</servlet-name>
+        <url-pattern>/SubmitQuizServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -301,4 +301,43 @@ public class QuestionDAO {
         }
         return 0;
     }
+
+    public List<QuestionDTO> getRandomQuestions(int numberQuestion, String subjectID) throws SQLException, NamingException, Exception {
+        conn = null;
+        preStm = null;
+        rs = null;
+        List<QuestionDTO> list = null;
+        try {
+            conn = DBUtils.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT TOP " + numberQuestion + " id,question_content,answer_1,answer_2,answer_3,answer_4,answer_correct,"
+                        + "createDate "
+                        + "FROM tblQuestion WHERE subjectID = ? and status = ? ORDER BY NEWID()";
+                preStm = conn.prepareStatement(sql);
+                preStm.setString(1, subjectID);
+                preStm.setInt(2, 2);
+                rs = preStm.executeQuery();
+                while (rs.next()) {
+                    if (list == null) {
+                        list = new ArrayList<>();
+                    }
+                    String id = rs.getString("id");
+                    String questionContent = rs.getString("question_content");
+                    String a1 = rs.getString("answer_1");
+
+                    String a2 = rs.getString("answer_2");
+                    String a3 = rs.getString("answer_3");
+                    String a4 = rs.getString("answer_4");
+                    String answerCorrect = rs.getString("answer_correct");
+                    Date createDate = rs.getDate("createDate");
+
+                    QuestionDTO dto = new QuestionDTO(id, questionContent, a1, a2, a3, a4, answerCorrect, createDate, subjectID, 2);
+                    list.add(dto);
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return list;
+    }
 }

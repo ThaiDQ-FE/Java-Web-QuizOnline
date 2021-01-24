@@ -35,10 +35,25 @@
                     </c:if>
 
                 </div>
-                <div class="home-middle">
-                    <a class="home-a-link" href="LoadStatus">Get All Question</a><br/>
-                    <a class="home-a-link" href="LoadSubject">Create Question No Image</a><br/>
-                </div>
+                <c:if test="${role == 1}">
+                    <div class="home-middle">
+                        <a class="home-a-link" href="LoadStatus">Get All Question</a><br/>
+                        <a class="home-a-link" href="LoadSubject">Create Question No Image</a><br/>
+                    </div>
+                </c:if>
+                <c:if test="${role != 1}">
+                    <div class="home-middle">
+                        <form action="TakeQuiz">
+                            <select name="slSubjectID" id="subject">
+                                <c:forEach var="dto" items="${requestScope.LIST_SUBJECT}">
+                                    <option  value="${dto.subjectID}">${dto.subjectID}</option>
+                                </c:forEach>
+                            </select><br/>
+                            <input type="submit" value="Take Quiz" name="btnAction"/><br/>
+                        </form>
+                    </div>
+                </c:if>
+
                 <div class="home-footer">
                     <form class="home-hello" action="logout" method="POST">
                         <input class="logout-button footer" type="submit" name="btnAction" value="Logout"/>
