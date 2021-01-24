@@ -38,7 +38,6 @@
                 <div class="home-middle">
                     <a class="home-a-link" href="LoadStatus">Get All Question</a><br/>
                     <a class="home-a-link" href="LoadSubject">Create Question No Image</a><br/>
-                    <a class="home-a-link" href="createQuestionNoImage.jsp">Create Question With Image</a>
                 </div>
                 <div class="home-footer">
                     <form class="home-hello" action="logout" method="POST">

@@ -56,6 +56,7 @@
                                 <th class="three-dot ypx">Answer Correct</th>
                                 <th class="ypx">Create Date</th>
                                 <th class="ypx">Subject Name</th>
+                                <th colspan="2">Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -75,6 +76,18 @@
                                     <td class="three-dot ypx">${list.answer_correct}</td>
                                     <td class="three-dot ypx">${list.createDate}</td>
                                     <td class="three-dot qpx">${list.subjectID}</td>
+                                    <td>
+                                        <form action="Delete" method="post">
+                                            <input style="display: none" type="text" value="${list.id}" name="pk"/>
+                                            <input onclick="return confirm('Are you sure you want to delete this Product!?')" class="button-delete" type="submit" name="btnAction" value="Delete"/>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="GetInfo" method="post">
+                                            <input style="display: none" type="text" value="${list.id}" name="pk"/>
+                                            <input class="button-update" type="submit" name="btnAction" value="Get info"/>
+                                        </form>
+                                    </td>
                                 </tr>
                             </tbody>
                         </c:forEach>
@@ -153,7 +166,7 @@
             position: relative;
         }
         .container{
-            width: 70%;
+            width: 80%;
             height: 70%;
             background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
             position: absolute;

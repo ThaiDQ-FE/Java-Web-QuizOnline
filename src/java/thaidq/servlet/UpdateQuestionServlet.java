@@ -7,28 +7,20 @@ package thaidq.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
-import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import thaidq.dao.QuestionDAO;
-import thaidq.dao.StatusDAO;
-import thaidq.dao.SubjectDAO;
 import thaidq.dto.QuestionDTO;
-import thaidq.dto.SubjectDTO;
 
 /**
  *
  * @author thaid
  */
-public class SearchServlet extends HttpServlet {
+public class UpdateQuestionServlet extends HttpServlet {
 
-    private final String SHOW_SEARCH_PAGE = "home.jsp";
+    private static final String GET_ALL = "LoadStatus";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,39 +34,26 @@ public class SearchServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String type = request.getParameter("slType");
-        String slStatusDes = request.getParameter("slStatusDes");
-        String searchValue = request.getParameter("txtSearchValue");
-        String page = request.getParameter("page") != null ? request.getParameter("page") : "1";
-        if (Integer.parseInt(page) < 1) {
-            page = "1";
-        }
+        String questionID = request.getParameter("txtID");
+        String subjectID = request.getParameter("txtSubjectID");
+        String question_content = request.getParameter("txtQuestionContent");
+        String ans1 = request.getParameter("txtAns1");
+        String ans2 = request.getParameter("txtAns2");
+        String ans3 = request.getParameter("txtAns3");
+        String ans4 = request.getParameter("txtAns4");
+        String ans_cor = request.getParameter("txtAnsCor");
+        String url = GET_ALL;
         try {
-            QuestionDAO qDAO = new QuestionDAO();
-            SubjectDAO sDAO = new SubjectDAO();
-            StatusDAO stDAO = new StatusDAO();
-            int statusID = stDAO.getStatus(slStatusDes);
-            if (type.equals("Name Question")) {
-                int countListQuest = qDAO.countQuestionByName(searchValue, statusID);
-                List<QuestionDTO> listQuest = qDAO.searchQuestionByName(searchValue, statusID, page);
-                int totalPage = 1;
-                if (countListQuest % 5 == 0) {
-                    totalPage = countListQuest / 5;
-                } else {
-                    totalPage = (countListQuest / 5) + 1;
-                }
-                request.setAttribute("SEARCH_RESULT", listQuest);
-                request.setAttribute("PAGINATION", totalPage);
-                request.setAttribute("CURRENT_PAGE", page);
+            QuestionDAO dao = new QuestionDAO();
+            QuestionDTO dto = new QuestionDTO(question_content, ans1, ans2, ans3, ans4, ans_cor, subjectID);
+            if (dao.updateQuestion(dto, questionID)) {
+                url = GET_ALL;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher("test.jsp");
-            rd.forward(request, response);
+            response.sendRedirect(url);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

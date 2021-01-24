@@ -50,6 +50,22 @@ public class QuestionDTO {
         this.createDate = createDate;
         this.subjectID = subjectID;
     }
+
+    public QuestionDTO(String question_content, String answer_1, String answer_2, String answer_3, String answer_4, String answer_correct, String subjectID) {
+        this.question_content = question_content;
+        this.answer_1 = answer_1;
+        this.answer_2 = answer_2;
+        this.answer_3 = answer_3;
+        this.answer_4 = answer_4;
+        this.answer_correct = answer_correct;
+        this.subjectID = subjectID;
+    }
+
+    public QuestionDTO(String subjectID) {
+        this.subjectID = subjectID;
+    }
+    
+    
     
     
 

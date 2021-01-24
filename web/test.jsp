@@ -24,7 +24,7 @@
         <div class="container">
             <div class="home-container">
                 <div class="search-top">
-                    <a href="home.jsp">Back</a>
+                    <a href="LoadStatus">Back</a>
                     <form class="home-hello" action="logout" method="POST">
                         <input class="logout-button logout" type="submit" name="btnAction" value="Logout"/>
                     </form>

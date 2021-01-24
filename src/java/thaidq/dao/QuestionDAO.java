@@ -112,6 +112,131 @@ public class QuestionDAO {
         return list;
     }
 
+    public boolean delete(String id) throws Exception {
+        boolean check = false;
+        try {
+            String sql = "Update tblQuestion set status = ? where id = ? ";
+            conn = DBUtils.makeConnection();
+            preStm = conn.prepareStatement(sql);
+            preStm.setInt(1, 3);
+            preStm.setString(2, id);
+            check = preStm.executeUpdate() > 0;
+        } finally {
+            closeConnection();
+        }
+
+        return check;
+    }
+
+    public boolean updateQuestion(QuestionDTO dto, String id) throws Exception {
+        boolean check = false;
+        try {
+            String sql = "Update tblQuestion Set subjectID = ?, question_content = ?, answer_1 = ?, answer_2 = ?, answer_3 = ?, answer_4 = ?, answer_correct = ? Where id = ?";
+            conn = DBUtils.makeConnection();
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, dto.getSubjectID());
+            preStm.setString(2, dto.getQuestion_content());
+            preStm.setString(3, dto.getAnswer_1());
+            preStm.setString(4, dto.getAnswer_2());
+            preStm.setString(5, dto.getAnswer_3());
+            preStm.setString(6, dto.getAnswer_4());
+            preStm.setString(7, dto.getAnswer_correct());
+            preStm.setString(8, id);
+            check = preStm.executeUpdate() > 0;
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
+
+    public List<QuestionDTO> getAllStatus(String subject) throws Exception {
+        conn = null;
+        preStm = null;
+        rs = null;
+        List<QuestionDTO> list = null;
+        try {
+            conn = DBUtils.makeConnection();
+            if (conn != null) {
+                String sql = "Select subjectID \n"
+                        + "From tblQuestion \n"
+                        + "where not subjectID = ? \n"
+                        + "group by subjectID";
+                preStm = conn.prepareStatement(sql);
+                preStm.setString(1, subject);
+                rs = preStm.executeQuery();
+                while (rs.next()) {
+                    if (list == null) {
+                        list = new ArrayList<>();
+                    }
+                    String subjectID = rs.getString("subjectID");
+                    QuestionDTO dto = new QuestionDTO(subjectID);
+                    list.add(dto);
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return list;
+    }
+
+    public String getSubjectIDById(String id) throws Exception {
+        conn = null;
+        preStm = null;
+        rs = null;
+        String questionId = "";
+        try {
+            conn = DBUtils.makeConnection();
+            if (conn != null) {
+                String sql = "Select subjectID \n"
+                        + "From tblQuestion \n"
+                        + "where id = ?";
+                preStm = conn.prepareStatement(sql);
+                preStm.setString(1, id);
+                rs = preStm.executeQuery();
+                if (rs.next()) {
+                    questionId = rs.getString("subjectID");
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return questionId;
+    }
+
+    public QuestionDTO getQuestionById(String questionId) throws Exception {
+        QuestionDTO dto = null;
+        conn = null;
+        preStm = null;
+        rs = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            if (conn != null) {
+                String sql = "Select id,question_content,answer_1,answer_2, answer_3,answer_4,answer_correct,createDate,subjectID \n"
+                        + "From tblQuestion \n"
+                        + "Where id = ?";
+                preStm = conn.prepareStatement(sql);
+                preStm.setString(1, questionId);
+                rs = preStm.executeQuery();
+                while (rs.next()) {
+                    String id = rs.getString("id");
+                    String questionContent = rs.getString("question_content");
+                    String a1 = rs.getString("answer_1");
+                    String a2 = rs.getString("answer_2");
+                    String a3 = rs.getString("answer_3");
+                    String a4 = rs.getString("answer_4");
+                    String answerCorrect = rs.getString("answer_correct");
+                    Date createDate = rs.getDate("createDate");
+                    String subjectID = rs.getString("subjectID");
+                    dto = new QuestionDTO(id, questionContent, a1, a2, a3, a4, answerCorrect, createDate, subjectID);
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return dto;
+    }
+
     public List<QuestionDTO> searchQuestionByName(String searchValue, int status, String page) throws Exception {
         List<QuestionDTO> list = null;
         conn = null;
