@@ -59,6 +59,9 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("ERORR_LOGIN", "ERORR_LOGIN");
             request.setAttribute("ERORR", "Login failed! Email or password not correct!");
         } else {
+            if(dto.getRole() != 1){
+                session.setAttribute("STUDENT", dto);
+            }
             url = HOME_PAGE;
             session.setAttribute("ROLE", dto.getRole());
             session.setAttribute("NAME_ACCOUNT", dto.getName());

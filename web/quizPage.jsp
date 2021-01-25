@@ -36,7 +36,7 @@
                     <button id="btnPrevious">Previous</button>
                     <button id="btnNext">Next</button>
                 </div>
-                <form id="formQuiz" action="SubmitQuiz" class="container-question" method="POST" >
+                <form id="formQuiz" action="CheckQuiz" class="container-question" method="POST" >
 
                     <c:forEach var="row" items="${listQuestion}" varStatus="i">
                         <table class="question hiddenQuestion" id="q+${i.count}">

@@ -354,4 +354,28 @@ public class QuestionDAO {
         }
         return list;
     }
+    
+    public String getQuestionCorrectByQuestionID(String questionID) throws Exception{
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        String result = "";
+        try {
+            conn = DBUtils.makeConnection();
+            if (conn != null) {
+                String sql = "Select answer_correct from tblQuestion where id = ?";
+
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, questionID);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    result = rs.getString("answer_correct");
+
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return result;
+    }
 }
