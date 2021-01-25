@@ -237,7 +237,7 @@ public class QuestionDAO {
         return dto;
     }
 
-    public List<QuestionDTO> searchQuestionByName(String searchValue, int status, String page) throws Exception {
+    public List<QuestionDTO> searchQuestionByName(String searchValue, int status) throws Exception {
         List<QuestionDTO> list = null;
         conn = null;
         preStm = null;
@@ -248,8 +248,7 @@ public class QuestionDAO {
                 String sql = "Select id,question_content,answer_1,answer_2, answer_3,answer_4,answer_correct,createDate,subjectID \n"
                         + "From tblQuestion \n"
                         + "Where question_content like ? AND status = ? \n"
-                        + "ORDER BY question_content \n"
-                        + "OFFSET " + ((Integer.parseInt(page) - 1) * 5) + "ROWS FETCH NEXT 5 ROWS ONLY";
+                        + "ORDER BY question_content";
                 preStm = conn.prepareStatement(sql);
                 preStm.setString(1, "%" + searchValue + "%");
                 preStm.setInt(2, status);
@@ -276,30 +275,45 @@ public class QuestionDAO {
         }
         return list;
     }
-
-    public int countQuestionByName(String subjectID, int status) throws Exception {
+    
+    
+    public List<QuestionDTO> searchQuestionBySubjectID(String searchValue, int status) throws Exception {
+        List<QuestionDTO> list = null;
         conn = null;
         preStm = null;
         rs = null;
-
         try {
             conn = DBUtils.makeConnection();
             if (conn != null) {
-                String sql = "SELECT COUNT(id) FROM tblQuestion WHERE "
-                        + "subjectID like ? and status = ?";
+                String sql = "Select q.id,q.question_content,q.answer_1,q.answer_2, q.answer_3,q.answer_4,q.answer_correct,q.createDate,s.subjectName \n"
+                        + "From tblQuestion as q, tblSubject as s \n"
+                        + "Where q.subjectID = s.subjectID and q.subjectID like ? AND q.status = ? \n"
+                        + "ORDER BY q.question_content";
                 preStm = conn.prepareStatement(sql);
-                preStm.setString(1, "%" + subjectID + "%");
+                preStm.setString(1, "%" + searchValue + "%");
                 preStm.setInt(2, status);
                 rs = preStm.executeQuery();
                 while (rs.next()) {
-                    return rs.getInt(1);
-
+                    if (list == null) {
+                        list = new ArrayList<>();
+                    }
+                    String id = rs.getString("id");
+                    String questionContent = rs.getString("question_content");
+                    String a1 = rs.getString("answer_1");
+                    String a2 = rs.getString("answer_2");
+                    String a3 = rs.getString("answer_3");
+                    String a4 = rs.getString("answer_4");
+                    String answerCorrect = rs.getString("answer_correct");
+                    Date createDate = rs.getDate("createDate");
+                    String subjectID = rs.getString("subjectName");
+                    QuestionDTO dto = new QuestionDTO(id, questionContent, a1, a2, a3, a4, answerCorrect, createDate, subjectID, status);
+                    list.add(dto);
                 }
             }
         } finally {
             closeConnection();
         }
-        return 0;
+        return list;
     }
 
     public List<QuestionDTO> getRandomQuestions(int numberQuestion, String subjectID) throws SQLException, NamingException, Exception {

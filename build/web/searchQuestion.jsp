@@ -56,36 +56,41 @@
                                 <th class="three-dot ypx">Answer Correct</th>
                                 <th class="ypx">Create Date</th>
                                 <th class="ypx">Subject Name</th>
-                                <th colspan="2">Action</th>
+                                <th colspan="2">Delete</th>
+                                <th colspan="2">Update</th>
                             </tr>
                         </thead>
                     </table>
 
                 </div>
                 <div class="list">
-                    <table>
+                    <table style="width: 100%">
                         <c:forEach var="list" items="${requestScope.LIST_QUESTION}">
                             <tbody style="width: 100%" class="color">
                                 <tr>
-                                    <td class="three-dot zpx">${list.id}</td>
-                                    <td class="three-dot xpx">${list.question_content}</td>
-                                    <td class="three-dot ypx">${list.answer_1}</td>
-                                    <td class="three-dot ypx">${list.answer_2}</td>
-                                    <td class="three-dot ypx">${list.answer_3}</td>
-                                    <td class="three-dot ypx">${list.answer_4}</td>
-                                    <td class="three-dot ypx">${list.answer_correct}</td>
-                                    <td class="three-dot ypx">${list.createDate}</td>
-                                    <td class="three-dot qpx">${list.subjectID}</td>
-                                    <td>
+                                    <td class="three-dot zpx center">${list.id}</td>
+                                    <td class="three-dot xpx center">${list.question_content}</td>
+                                    <td class="three-dot ypx center">${list.answer_1}</td>
+                                    <td class="three-dot ypx center">${list.answer_2}</td>
+                                    <td class="three-dot ypx center">${list.answer_3}</td>
+                                    <td class="three-dot ypx center">${list.answer_4}</td>
+                                    <td class="three-dot ypx center">${list.answer_correct}</td>
+                                    <td class="three-dot ypx center">${list.createDate}</td>
+                                    <td class="three-dot qpx center">${list.subjectID}</td>
+                                    <td class="center" style="width: 40px">
                                         <form action="Delete" method="post">
                                             <input style="display: none" type="text" value="${list.id}" name="pk"/>
-                                            <input onclick="return confirm('Are you sure you want to delete this Product!?')" class="button-delete" type="submit" name="btnAction" value="Delete"/>
+                                            <button style="border: none; background: transparent; cursor: pointer" onclick="return confirm('Are you sure you want to delete this Product!?')" class="button-delete" type="submit" name="btnAction">
+                                                <img style="width: 21px" src="https://i.ibb.co/P5kgvVf/delete.png" alt="delete" border="0">
+                                            </button>
                                         </form>
                                     </td>
-                                    <td>
+                                    <td class="center" style="width: 40px">
                                         <form action="GetInfo" method="post">
                                             <input style="display: none" type="text" value="${list.id}" name="pk"/>
-                                            <input class="button-update" type="submit" name="btnAction" value="Get info"/>
+                                            <button style="border: none; background: transparent; cursor: pointer" class="button-update" type="submit" name="btnAction">
+                                                <img style="width: 21px" src="https://i.ibb.co/j87LQ1p/updated.png" alt="updated" border="0">
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -97,26 +102,32 @@
         </div>
     </body>
     <style>
-        .color:nth-child(even){
+        button:focus{
+            outline: none;
+        }
+        .center{
+            text-align: center;
+        }
+        .color:nth-child(odd){
             background: linear-gradient(to right, #ede574, #e1f5c4);
         }
         .qpx{
             width: 100px;
         }
         .zpx{
-            margin-right: 5px;
+            width: 50px;
         }
         .xpx{
-            width: 220px
+            width: 285px
         }
         .ypx{
-            width: 105px;
+            width: 110px;
         }
         .three-dot{
-            display: inline-block;
+/*            display: inline-block;
             overflow: hidden;
             white-space: nowrap;
-            text-overflow: ellipsis;
+            text-overflow: ellipsis;*/
         }
         .list{
             height: calc(100% - 139px);
@@ -166,7 +177,7 @@
             position: relative;
         }
         .container{
-            width: 80%;
+            width: 82%;
             height: 70%;
             background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
             position: absolute;

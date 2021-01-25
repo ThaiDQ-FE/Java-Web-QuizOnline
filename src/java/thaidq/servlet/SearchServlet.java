@@ -21,6 +21,7 @@ import thaidq.dao.StatusDAO;
 import thaidq.dao.SubjectDAO;
 import thaidq.dto.QuestionDTO;
 import thaidq.dto.SubjectDTO;
+import org.json.simple.*;
 
 /**
  *
@@ -45,33 +46,22 @@ public class SearchServlet extends HttpServlet {
         String type = request.getParameter("slType");
         String slStatusDes = request.getParameter("slStatusDes");
         String searchValue = request.getParameter("txtSearchValue");
-        String page = request.getParameter("page") != null ? request.getParameter("page") : "1";
-        if (Integer.parseInt(page) < 1) {
-            page = "1";
-        }
         try {
             QuestionDAO qDAO = new QuestionDAO();
             SubjectDAO sDAO = new SubjectDAO();
             StatusDAO stDAO = new StatusDAO();
             int statusID = stDAO.getStatus(slStatusDes);
             if (type.equals("Name Question")) {
-                int countListQuest = qDAO.countQuestionByName(searchValue, statusID);
-                List<QuestionDTO> listQuest = qDAO.searchQuestionByName(searchValue, statusID, page);
-                int totalPage = 1;
-                if (countListQuest % 5 == 0) {
-                    totalPage = countListQuest / 5;
-                } else {
-                    totalPage = (countListQuest / 5) + 1;
-                }
+                List<QuestionDTO> listQuest = qDAO.searchQuestionByName(searchValue, statusID);
                 request.setAttribute("SEARCH_RESULT", listQuest);
-                request.setAttribute("PAGINATION", totalPage);
-                request.setAttribute("CURRENT_PAGE", page);
+            } else if(type.equals("Subject ID")){
+                List<QuestionDTO> listQuest = qDAO.searchQuestionBySubjectID(searchValue, statusID);
+                request.setAttribute("SEARCH_RESULT", listQuest);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher("test.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("searchResult.jsp");
             rd.forward(request, response);
         }
 

@@ -151,7 +151,7 @@ public class QuestionDTO {
 
     @Override
     public String toString() {
-        return "QuestionDTO{" + "id=" + id + ", question_content=" + question_content + ", answer_1=" + answer_1 + ", answer_2=" + answer_2 + ", answer_3=" + answer_3 + ", answer_4=" + answer_4 + ", answer_correct=" + answer_correct + ", createDate=" + createDate + ", subjectID=" + subjectID + ", status=" + status + '}' +"\n";
+        return "QuestionDTO{" + "id=" + id + ", question_content=" + question_content + ", answer_1=" + answer_1 + ", answer_2=" + answer_2 + ", answer_3=" + answer_3 + ", answer_4=" + answer_4 + ", answer_correct=" + answer_correct + ", createDate=" + createDate + ", subjectID=" + subjectID + ", status=" + status + '}';
     }
     
     

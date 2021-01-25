@@ -1,9 +1,9 @@
 <%-- 
-    Document   : searchQuestion
-    Created on : Jan 24, 2021, 7:58:44 PM
+    Document   : test
+    Created on : Jan 24, 2021, 11:21:45 PM
     Author     : thaid
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,31 +24,17 @@
         <div class="container">
             <div class="home-container">
                 <div class="search-top">
-                    <a href="home.jsp">Back</a>
+                    <a href="LoadStatus">Back</a>
                     <form class="home-hello" action="logout" method="POST">
                         <input class="logout-button logout" type="submit" name="btnAction" value="Logout"/>
                     </form>
                 </div>
-
-                <form action="Search" method="post" style="text-align: center">
-                    <select name="slType">
-                        <option>Name Question</option>
-                        <option>Subject ID</option>
-                    </select>
-                    <select name="slStatusDes" id="subject">
-                        <c:forEach var="dto" items="${requestScope.LIST_STATUS}">
-                            <option  value="${dto.description}">${dto.description}</option>
-                        </c:forEach>
-                    </select>
-                    <input type="text" name="txtSearchValue"/>
-                    <input type="submit" name="btnAction" value="Search"/>
-                </form>
                 <div>
                     <table class="tb-head">
                         <thead>
                             <tr class="tr-thead">
                                 <th class="zpx">ID</th>
-                                <th class="xpx">Question Content</th>
+                                <th class="xpxx">Question Content</th>
                                 <th class="ypx">Answer 1</th>
                                 <th class="ypx">Answer 2</th>
                                 <th class="ypx">Answer 3</th>
@@ -56,54 +42,110 @@
                                 <th class="three-dot ypx">Answer Correct</th>
                                 <th class="ypx">Create Date</th>
                                 <th class="ypx">Subject Name</th>
-                                <th colspan="2">Delete</th>
-                                <th colspan="2">Update</th>
+                                <th>Delete</th>
+                                <th>Update</th>
                             </tr>
                         </thead>
                     </table>
 
                 </div>
                 <div class="list">
-                    <table style="width: 100%">
-                        <c:forEach var="list" items="${requestScope.LIST_QUESTION}">
-                            <tbody style="width: 100%" class="color">
-                                <tr>
-                                    <td class="three-dot zpx center">${list.id}</td>
-                                    <td class="three-dot xpx center">${list.question_content}</td>
-                                    <td class="three-dot ypx center">${list.answer_1}</td>
-                                    <td class="three-dot ypx center">${list.answer_2}</td>
-                                    <td class="three-dot ypx center">${list.answer_3}</td>
-                                    <td class="three-dot ypx center">${list.answer_4}</td>
-                                    <td class="three-dot ypx center">${list.answer_correct}</td>
-                                    <td class="three-dot ypx center">${list.createDate}</td>
-                                    <td class="three-dot qpx center">${list.subjectID}</td>
-                                    <td class="center" style="width: 40px">
+                    <div class="paginate">
+                        <div class="items">
+                            <c:forEach var="list" items="${requestScope.SEARCH_RESULT}">
+                                <div style="display: flex" class="color">
+                                    <div class="three-dot zpx center">${list.id}</div>
+                                    <div class="three-dot xpx center">${list.question_content}</div>
+                                    <div class="three-dot ypx center">${list.answer_1}</div>
+                                    <div class="three-dot ypx center">${list.answer_2}</div>
+                                    <div class="three-dot ypx center">${list.answer_3}</div>
+                                    <div class="three-dot ypx center">${list.answer_4}</div>
+                                    <div class="three-dot ypx center">${list.answer_correct}</div>
+                                    <div class="three-dot ypx center">${list.createDate}</div>
+                                    <div class="three-dot qpx center">${list.subjectID}</div>
+                                    <div class="center" style="width: 40px">
                                         <form action="Delete" method="post">
                                             <input style="display: none" type="text" value="${list.id}" name="pk"/>
                                             <button style="border: none; background: transparent; cursor: pointer" onclick="return confirm('Are you sure you want to delete this Product!?')" class="button-delete" type="submit" name="btnAction">
                                                 <img style="width: 21px" src="https://i.ibb.co/P5kgvVf/delete.png" alt="delete" border="0">
                                             </button>
                                         </form>
-                                    </td>
-                                    <td class="center" style="width: 40px">
+                                    </div>
+                                    <div class="center" style="width: 40px">
                                         <form action="GetInfo" method="post">
                                             <input style="display: none" type="text" value="${list.id}" name="pk"/>
                                             <button style="border: none; background: transparent; cursor: pointer" class="button-update" type="submit" name="btnAction">
                                                 <img style="width: 21px" src="https://i.ibb.co/j87LQ1p/updated.png" alt="updated" border="0">
                                             </button>
                                         </form>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </c:forEach>
-                    </table>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                        <div class="pager">
+                            <div class="firstPage">&laquo;</div>
+                            <div class="previousPage">&lsaquo;</div>
+                            <div class="pageNumbers"></div>
+                            <div class="nextPage">&rsaquo;</div>
+                            <div class="lastPage">&raquo;</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+        <script src="https://drive.google.com/uc?export=view&id=1pFZ-6kDz5Bm8TDtaxwdWn5hzkpcw6WYV"></script>
+        <script>
+                                            window.onload = function () {
+                                                $(".paginate").paginga({
+                                                    itemsPerPage: 5,
+
+                                                });
+                                            }
+        </script>
     </body>
     <style>
         button:focus{
             outline: none;
+        }
+        .xpxx{
+            width: 300px;
+        }
+        .pageNumbers a{
+            color: #ada996;
+        }
+        .pageNumbers .active{
+            color: black;
+        }
+        .list{
+            height: calc(100% - 139px);
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+        .disabled{
+            cursor:  context-menu !important;
+            color: #cccccc;
+        }
+        .disabled:hover{
+            color: #cccccc !important;
+        }
+        .firstPage,.previousPage,.nextPage,.lastPage{
+            cursor: pointer;
+            transition: all .5s;
+        }
+        .firstPage:hover,.previousPage:hover,.nextPage:hover,.lastPage:hover{
+            color: #ada996;
+        }
+        .previousPage, .nextPage{
+            margin: 0 24px;
+        }
+        .pager{
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translate(-50%, 0);
+            display: flex;
+            font-size: 23px;
         }
         .center{
             text-align: center;
@@ -122,17 +164,6 @@
         }
         .ypx{
             width: 110px;
-        }
-        .three-dot{
-/*            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;*/
-        }
-        .list{
-            height: calc(100% - 139px);
-            overflow-x: hidden;
-            overflow-y: scroll;
         }
         .logout{
             font-size: 23px;

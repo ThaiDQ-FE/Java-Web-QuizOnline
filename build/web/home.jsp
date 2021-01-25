@@ -44,12 +44,12 @@
                 <c:if test="${role != 1}">
                     <div class="home-middle">
                         <form action="TakeQuiz">
-                            <select name="slSubjectID" id="subject">
+                            <select name="slSubjectID" id="subject" class="slSubjectID">
                                 <c:forEach var="dto" items="${requestScope.LIST_SUBJECT}">
                                     <option  value="${dto.subjectID}">${dto.subjectID}</option>
                                 </c:forEach>
                             </select><br/>
-                            <input type="submit" value="Take Quiz" name="btnAction"/><br/>
+                            <input class="take-quiz" type="submit" value="Take Quiz" name="btnAction"/><br/>
                         </form>
                     </div>
                 </c:if>
@@ -62,7 +62,32 @@
             </div>
         </div>
     </body>
-    <style>
+    <style>    
+        .slSubjectID{
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-family: 'Pacifico', cursive;
+            transition: all .5s;
+            font-weight: bold;
+        }
+        .slSubjectID:focus{
+            outline: none;
+        }
+        .slSubjectID:hover{
+            color: #ada996;
+        }
+        .take-quiz{
+            border: none;
+            font-size: 23px;
+            background: transparent;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all .5s;
+        }
+        .take-quiz:hover{
+            color: #ada996;
+        }
         *{
             margin: 0;
             padding: 0;

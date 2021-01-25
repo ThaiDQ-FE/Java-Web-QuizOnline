@@ -44,7 +44,7 @@
                                 <tr>
 
                                     <td>Question ${i.count} : </td>
-                                    <td><textarea id="questionContent" rows="5" cols="60" readonly>${row.question_content}</textarea></td>
+                                    <td><textarea class="questionContent" id="questionContent" rows="3" cols="60" readonly>${row.question_content}</textarea></td>
                                 </tr>
 
                                 <tr>
@@ -74,7 +74,7 @@
                     <input type="hidden" name="subjectID" value="${subjectID}"/>
                     <input type="hidden" id="txtTimeRemaining" name="txtTimeRemaining" value=""/>
                     <input type="hidden" name="txtQuizTime" value="${quizTime}"/>
-                    <input type="submit" id="btnSubmit" value="Finish Quiz" name="btAction">
+                    <input class="submit" type="submit" id="btnSubmit" value="Finish Quiz" name="btAction">
 
                     <div>
                         <p class="container-question" style="color: red" id="timeCountDown"></p>
@@ -184,6 +184,23 @@
         </script>
     </body>
     <style>
+        .questionContent{
+            font-family: 'Pacifico', cursive;
+        }
+        .questionContent:focus {
+            outline: none;
+        }
+        .container-btn button, .submit{
+            border: none;
+            background: transparent;
+            font-family: 'Pacifico', cursive;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all .5s;
+        }.container-btn button:hover, .submit:hover{
+            color: #ada996;
+        }
         *{
             margin: 0;
             padding: 0;
