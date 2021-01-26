@@ -56,6 +56,14 @@
         <servlet-name>CheckQuizServlet</servlet-name>
         <servlet-class>thaidq.servlet.CheckQuizServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewQuizHistoryServlet</servlet-name>
+        <servlet-class>thaidq.servlet.ViewQuizHistoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchHistoryServlet</servlet-name>
+        <servlet-class>thaidq.servlet.SearchHistoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -103,6 +111,14 @@
     <servlet-mapping>
         <servlet-name>CheckQuizServlet</servlet-name>
         <url-pattern>/CheckQuizServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewQuizHistoryServlet</servlet-name>
+        <url-pattern>/ViewQuizHistoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchHistoryServlet</servlet-name>
+        <url-pattern>/SearchHistoryServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

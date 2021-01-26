@@ -6,24 +6,30 @@
 package thaidq.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import thaidq.dao.QuestionDAO;
+import javax.servlet.http.HttpSession;
+import thaidq.dao.HistoryDAO;
 import thaidq.dao.StatusDAO;
 import thaidq.dao.SubjectDAO;
-import thaidq.dto.QuestionDTO;
+import thaidq.dto.AccountDTO;
+import thaidq.dto.HistoryDTO;
+import thaidq.dto.StatusDTO;
+import thaidq.dto.SubjectDTO;
 
 /**
  *
  * @author thaid
  */
-public class SearchServlet extends HttpServlet {
+public class ViewQuizHistoryServlet extends HttpServlet {
 
-    private final String SHOW_SEARCH_PAGE = "home.jsp";
+    private final String QUIZ_HISTORY = "viewQuizHistory.jsp";
+    private final String LOGIN_PAGE = "login.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,28 +43,27 @@ public class SearchServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String type = request.getParameter("slType");
-        String slStatusDes = request.getParameter("slStatusDes");
-        String searchValue = request.getParameter("txtSearchValue");
+        String url = LOGIN_PAGE;
         try {
-            QuestionDAO qDAO = new QuestionDAO();
-            SubjectDAO sDAO = new SubjectDAO();
-            StatusDAO stDAO = new StatusDAO();
-            int statusID = stDAO.getStatus(slStatusDes);
-            if (type.equals("Name Question")) {
-                List<QuestionDTO> listQuest = qDAO.searchQuestionByName(searchValue, statusID);
-                request.setAttribute("SEARCH_RESULT", listQuest);
-            } else if(type.equals("Subject ID")){
-                List<QuestionDTO> listQuest = qDAO.searchQuestionBySubjectID(searchValue, statusID);
-                request.setAttribute("SEARCH_RESULT", listQuest);
+            HttpSession session = request.getSession(false);
+            if (session != null && session.getAttribute("STUDENT") != null) {
+                AccountDTO userInfo = (AccountDTO) session.getAttribute("STUDENT");
+                HistoryDAO dao = new HistoryDAO();
+                SubjectDAO sDao = new SubjectDAO();
+                List<SubjectDTO> list = sDao.getAllSubject();
+                List<HistoryDTO> listQuizHistory = dao.getAllQuizHistoryByEmail(userInfo.getEmail());
+                request.setAttribute("HISTORY_LIST", listQuizHistory);
+                request.setAttribute("LIST_SUBJECT", list);
+                url = QUIZ_HISTORY;
+            } else {
+                url = LOGIN_PAGE;
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher("searchResult.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

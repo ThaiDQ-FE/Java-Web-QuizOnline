@@ -51,6 +51,9 @@
                             </select><br/>
                             <input class="take-quiz" type="submit" value="Take Quiz" name="btnAction"/><br/>
                         </form>
+                        <form action="ViewQuizHistory">
+                            <input class="take-quiz" type="submit" value="History" name="btnAction"/><br/>
+                        </form>
                     </div>
                 </c:if>
 

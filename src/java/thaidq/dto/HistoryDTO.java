@@ -15,6 +15,8 @@ import java.sql.Timestamp;
  */
 public class HistoryDTO implements Serializable{
     private String userEmail;
+    private String subjectName;
+    private int numberQuestion;
     private String subjectID;
     private double point;
     private int correctAnswers;
@@ -33,6 +35,17 @@ public class HistoryDTO implements Serializable{
         this.date = date;
     }
 
+    public HistoryDTO(String userEmail, String subjectName, String subjectID,int numberQuestion, double point, int correctAnswers, Time time, Timestamp date) {
+        this.userEmail = userEmail;
+        this.subjectName = subjectName;
+        this.subjectID = subjectID;
+        this.numberQuestion = numberQuestion;
+        this.point = point;
+        this.correctAnswers = correctAnswers;
+        this.time = time;
+        this.date = date;
+    }
+    
     public String getUserEmail() {
         return userEmail;
     }
@@ -81,9 +94,28 @@ public class HistoryDTO implements Serializable{
         this.date = date;
     }
 
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
+    }
+
+    public int getNumberQuestion() {
+        return numberQuestion;
+    }
+
+    public void setNumberQuestion(int numberQuestion) {
+        this.numberQuestion = numberQuestion;
+    }
+    
+
     @Override
     public String toString() {
-        return "HistoryDTO{" + "userEmail=" + userEmail + ", subjectID=" + subjectID + ", point=" + point + ", correctAnswers=" + correctAnswers + ", time=" + time + ", date=" + date + '}';
+        return "HistoryDTO{" + "userEmail=" + userEmail + ", subjectName=" + subjectName + ", numberQuestion=" + numberQuestion + ", subjectID=" + subjectID + ", point=" + point + ", correctAnswers=" + correctAnswers + ", time=" + time + ", date=" + date + '}';
     }
+
+    
     
 }
