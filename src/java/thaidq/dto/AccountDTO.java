@@ -5,11 +5,13 @@
  */
 package thaidq.dto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author thaid
  */
-public class AccountDTO {
+public class AccountDTO implements Serializable{
     private String email;
     private String name;
     private String password;

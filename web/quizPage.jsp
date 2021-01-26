@@ -29,7 +29,15 @@
 
         <c:set var="student" value="${sessionScope.NAME_ACCOUNT}"/>
 
+
+
         <div class="container">
+            <c:if test="${empty listQuestion}">
+                <h2>
+                    Sorry , quiz of subject is updating !! Please choose another subject to take quiz !
+                </h2>
+                <a href="home.jsp">Go back </a>
+            </c:if>
             <c:if test="${not empty listQuestion}">
                 <h3 style="margin-left: 300px;color: red">${subjectID} Quiz</h3>
                 <div class="container-btn"> 

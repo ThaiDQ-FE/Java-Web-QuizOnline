@@ -5,6 +5,7 @@
  */
 package thaidq.dao;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -21,7 +22,7 @@ import thaidq.utils.DateCalculator;
  *
  * @author thaid
  */
-public class QuestionDAO {
+public class QuestionDAO implements Serializable{
 
     private Connection conn;
     private PreparedStatement preStm;
@@ -356,18 +357,18 @@ public class QuestionDAO {
     }
     
     public String getQuestionCorrectByQuestionID(String questionID) throws Exception{
-        Connection conn = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
+        conn = null;
+        preStm = null;
+        rs = null;
         String result = "";
         try {
             conn = DBUtils.makeConnection();
             if (conn != null) {
                 String sql = "Select answer_correct from tblQuestion where id = ?";
 
-                stm = conn.prepareStatement(sql);
-                stm.setString(1, questionID);
-                rs = stm.executeQuery();
+                preStm = conn.prepareStatement(sql);
+                preStm.setString(1, questionID);
+                rs = preStm.executeQuery();
                 if (rs.next()) {
                     result = rs.getString("answer_correct");
 

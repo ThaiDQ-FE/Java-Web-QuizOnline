@@ -45,7 +45,7 @@
                     <div class="home-middle">
                         <form action="TakeQuiz">
                             <select name="slSubjectID" id="subject" class="slSubjectID">
-                                <c:forEach var="dto" items="${requestScope.LIST_SUBJECT}">
+                                <c:forEach var="dto" items="${sessionScope.LIST_SUBJECT}">
                                     <option  value="${dto.subjectID}">${dto.subjectID}</option>
                                 </c:forEach>
                             </select><br/>

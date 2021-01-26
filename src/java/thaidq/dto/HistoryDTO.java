@@ -5,6 +5,7 @@
  */
 package thaidq.dto;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
 
@@ -12,7 +13,7 @@ import java.sql.Timestamp;
  *
  * @author thaid
  */
-public class HistoryDTO {
+public class HistoryDTO implements Serializable{
     private String userEmail;
     private String subjectID;
     private double point;

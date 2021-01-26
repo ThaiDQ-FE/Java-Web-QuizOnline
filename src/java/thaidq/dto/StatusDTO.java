@@ -5,11 +5,13 @@
  */
 package thaidq.dto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author thaid
  */
-public class StatusDTO {
+public class StatusDTO implements Serializable{
     private int status;
     private String description;
 

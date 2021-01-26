@@ -5,6 +5,7 @@
  */
 package thaidq.dao;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import thaidq.utils.DBUtils;
  *
  * @author thaid
  */
-public class HistoryDAO {
+public class HistoryDAO implements Serializable {
 
     private Connection conn;
     private PreparedStatement preStm;
@@ -60,7 +61,12 @@ public class HistoryDAO {
                 }
             }
         } finally {
-            closeConnection();
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return false;
     }

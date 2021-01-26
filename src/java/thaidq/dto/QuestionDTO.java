@@ -5,13 +5,14 @@
  */
 package thaidq.dto;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  *
  * @author thaid
  */
-public class QuestionDTO {
+public class QuestionDTO implements Serializable{
     private String id;
     private String question_content;
     private String answer_1;

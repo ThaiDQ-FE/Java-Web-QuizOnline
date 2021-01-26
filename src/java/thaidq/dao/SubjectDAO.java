@@ -5,6 +5,7 @@
  */
 package thaidq.dao;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ import thaidq.utils.DBUtils;
  *
  * @author thaid
  */
-public class SubjectDAO {
+public class SubjectDAO implements Serializable{
 
     private Connection conn;
     private PreparedStatement preStm;

@@ -5,11 +5,13 @@
  */
 package thaidq.dto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author thaid
  */
-public class SubjectDTO {
+public class SubjectDTO implements Serializable{
 
     private String subjectID;
     private String subjectName;

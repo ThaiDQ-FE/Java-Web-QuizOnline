@@ -53,10 +53,6 @@
         <servlet-class>thaidq.servlet.TakeQuizServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SubmitQuizServlet</servlet-name>
-        <servlet-class>thaidq.servlet.SubmitQuizServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CheckQuizServlet</servlet-name>
         <servlet-class>thaidq.servlet.CheckQuizServlet</servlet-class>
     </servlet>
@@ -103,10 +99,6 @@
     <servlet-mapping>
         <servlet-name>TakeQuizServlet</servlet-name>
         <url-pattern>/TakeQuizServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SubmitQuizServlet</servlet-name>
-        <url-pattern>/SubmitQuizServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CheckQuizServlet</servlet-name>

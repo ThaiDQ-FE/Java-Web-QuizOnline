@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
             url = HOME_PAGE;
             session.setAttribute("ROLE", dto.getRole());
             session.setAttribute("NAME_ACCOUNT", dto.getName());
-            request.setAttribute("LIST_SUBJECT", sdto);
+            session.setAttribute("LIST_SUBJECT", sdto);
         }
         RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);

@@ -6,13 +6,9 @@
 package thaidq.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
-import java.text.ParseException;
-import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -57,7 +53,8 @@ public class CheckQuizServlet extends HttpServlet {
         String url = QUIZ_RESULT;
         try {
             timeTakeQuiz = TimeQuiz.convertTotalSecondToTime(timeRemaining, timeQuiz + ":" + "00");
-        } catch (ParseException ex) {
+        } catch (Exception e) {
+            e.printStackTrace();
             url = QUIZ_ERROR;
         }
         Timestamp currentDateTime = new Timestamp(System.currentTimeMillis());
@@ -90,7 +87,6 @@ public class CheckQuizServlet extends HttpServlet {
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-
         }
     }
 
