@@ -3,20 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/LAB/QuizOnline/src/java/thaidq/servlet/SearchHistoryServlet.java</file>
-            <file>file:/D:/LAB/QuizOnline/src/java/thaidq/dao/SubjectDAO.java</file>
-            <file>file:/D:/LAB/QuizOnline/web/viewQuizHistory.jsp</file>
-            <file>file:/D:/LAB/QuizOnline/web/quizResult.jsp</file>
-            <file>file:/D:/LAB/QuizOnline/src/java/thaidq/dao/HistoryDAO.java</file>
-            <file>file:/D:/LAB/QuizOnline/src/java/thaidq/dto/HistoryDTO.java</file>
-            <file>file:/D:/LAB/QuizOnline/web/searchResult.jsp</file>
             <file>file:/D:/LAB/QuizOnline/src/java/thaidq/servlet/CheckQuizServlet.java</file>
-            <file>file:/D:/LAB/QuizOnline/web/quizPage.jsp</file>
-            <file>file:/D:/LAB/QuizOnline/web/viewSearchQuizHistory.jsp</file>
-            <file>file:/D:/LAB/QuizOnline/src/java/thaidq/dto/SubjectDTO.java</file>
-            <file>file:/D:/LAB/QuizOnline/src/java/thaidq/dao/QuestionDAO.java</file>
-            <file>file:/D:/LAB/QuizOnline/web/home.jsp</file>
-            <file>file:/D:/LAB/QuizOnline/src/java/thaidq/servlet/ViewQuizHistoryServlet.java</file>
+            <file>file:/D:/LAB/QuizOnline/web/searchResult.jsp</file>
         </group>
     </open-files>
 </project-private>

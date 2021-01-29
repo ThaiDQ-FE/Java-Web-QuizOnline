@@ -64,7 +64,7 @@ public class QuestionDAO implements Serializable{
                 preStm.setString(7, ansCorrect);
                 preStm.setDate(8, date);
                 preStm.setString(9, subjectID);
-                preStm.setInt(10, 1);
+                preStm.setInt(10, 2);
 
                 int row = preStm.executeUpdate();
                 if (row > 0) {
